@@ -1,0 +1,78 @@
+name: Data Update
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+
+# 多重起動防止
+concurrency:
+  group: "data_update"
+  cancel-in-progress: true
+
+jobs:
+  data-update:
+    runs-on: ubuntu-latest
+
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      LABEL_NAME: "JSONデータ更新"
+
+    steps:
+      - name: set Env value
+        env:
+          TZ: "Asia/Tokyo" # タイムゾーン指定
+        run: |
+          echo "process_date=`date '+%Y-%m-%d %H:%M:%S'`" >> "$GITHUB_ENV"
+          echo "branch_name=data_update/update_`date '+%Y-%m-%d_%H-%M-%S'`" >> "$GITHUB_ENV"
+
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Deno Setup
+        uses: denoland/setup-deno@v1
+
+      - name: Run CI
+        run: deno task ci
+
+      - name: Run cached
+        run: deno task cached
+
+      - name: Create Branch & Checkout
+        run: git checkout -b "${{ env.branch_name }}"
+
+      - name: Commit & Push
+        id: commit_push
+        if: steps.diff.outcome == 'failure'
+        run: |
+          set -x
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .
+          git commit -m "Update: ${{ env.process_date }}"
+          git push --set-upstream origin ${{ env.branch_name }}
+
+      - name: Label Create
+        run: |
+          gh label create "${{ env.LABEL_NAME }}" \
+            --color "#5d9469" \
+            --description "${{ env.LABEL_NAME }}" \
+            --force
+        continue-on-error: true
+
+      - name: Create Pull Request
+        id: cpr
+        run: |
+          gh pr create \
+            --assignee hytsnbr \
+            --reviewer hytsnbr \
+            --base main \
+            --title "データ更新: ${{ env.process_date }}" \
+            --body "${{ env.process_date }} 時点 更新データ" \
+            --label "${{ env.LABEL_NAME }}"
+        continue-on-error: true
+        
+      - name: Merge Pull Request
+        run: |
+          gh pr merge ${{ steps.cpr.outputs.pull-request-url }} --merge
