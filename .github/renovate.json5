@@ -1,7 +1,9 @@
 {
   // JSONスキーマで入力補完できるようにする
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [],
+  "extends": [
+    "config:base"
+  ],
   //タイムゾーン
   "timezone": "Asia/Tokyo",
   // スケジュール設定（タイムゾーン未設定の場合はUTCで設定する）
