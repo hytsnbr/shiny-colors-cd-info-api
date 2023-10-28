@@ -1,6 +1,6 @@
-import { dataJson } from "deps.ts";
 import { CdInfoList } from "@/model/cd_info_list.ts";
 import { CdInfo } from "@/model/cd_info.ts";
+import { dataJson } from "../../deps.ts";
 
 export default () => {
   const jsonData = dataJson;

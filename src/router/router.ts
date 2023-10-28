@@ -1,5 +1,5 @@
 import { apiController } from "@/controllers/api_controller.ts";
-import { Router, RouterContext } from "deps.ts";
+import { Router, RouterContext } from "../../deps.ts";
 
 const router = new Router();
 

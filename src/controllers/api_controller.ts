@@ -2,8 +2,8 @@ import dataJsonConvertor from "@/functions/data_json_convertor.ts";
 import { CdInfo } from "@/model/cd_info.ts";
 import { CdInfoList } from "@/model/cd_info_list.ts";
 import { Response } from "@/model/response.ts";
-import { RouterContext } from "deps.ts";
 import { helpers } from "https://deno.land/x/oak@v12.6.0/mod.ts";
+import { RouterContext } from "../../deps.ts";
 
 export const apiController = {
   getList(ctx: RouterContext<string>) {
