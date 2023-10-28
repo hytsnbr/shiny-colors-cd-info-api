@@ -1,4 +1,8 @@
-export { Application, Router } from "https://deno.land/x/oak@v12.6.0/mod.ts";
+export {
+  Application,
+  helpers,
+  Router,
+} from "https://deno.land/x/oak@v12.6.0/mod.ts";
 export type { RouterContext } from "https://deno.land/x/oak@v12.6.0/mod.ts";
 
 export { download } from "https://deno.land/x/download@v2.0.2/download.ts";

@@ -1,4 +1,4 @@
-import { Destination, download } from "../../deps.ts";
+import { Destination, download } from "@/deps.ts";
 
 const destination: Destination = {
   dir: "data",
