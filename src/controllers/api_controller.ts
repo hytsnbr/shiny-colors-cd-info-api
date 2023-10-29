@@ -30,6 +30,6 @@ export const apiController = {
       .filterByHiResStore(isHiRes)
       .getList();
 
-    ctx.response.body = new Response(result);
+    ctx.response.body = new Response(result).list;
   },
 };
