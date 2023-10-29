@@ -11,7 +11,7 @@ export class Response {
     cdInfoList.forEach((cdInfo: CdInfo) => {
       _infoList.push(
         new _Info(
-          cdInfo.artist,
+          cdInfo.title,
           cdInfo.recordNumbers,
           formatDate(cdInfo.releaseDate),
           cdInfo.jacketUrl,
