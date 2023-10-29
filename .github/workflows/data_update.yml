@@ -1,6 +1,7 @@
 name: Data Update
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "30 6 * * *"
 
