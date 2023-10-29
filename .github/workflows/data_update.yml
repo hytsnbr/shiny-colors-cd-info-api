@@ -2,7 +2,7 @@ name: Data Update
 
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "30 6 * * *"
 
 # 多重起動防止
 concurrency:
@@ -33,11 +33,13 @@ jobs:
       - name: Deno Setup
         uses: denoland/setup-deno@v1
 
-      - name: Run CI
-        run: deno task ci
-
       - name: Run cached
         run: deno task cached
+
+      - name: Diff
+        id: diff
+        run: git diff --name-only --exit-code
+        continue-on-error: true
 
       - name: Create Branch & Checkout
         run: git checkout -b "${{ env.branch_name }}"
@@ -76,3 +78,4 @@ jobs:
       - name: Merge Pull Request
         run: |
           gh pr merge ${{ steps.cpr.outputs.pull-request-url }} --merge
+        continue-on-error: true
