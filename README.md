@@ -4,7 +4,7 @@
 
 ## エンドポイント
 
-`htpps://shiny-colors-cd-info-api.deno.dev/list`
+`https://shiny-colors-cd-info-api.deno.dev/list`
 
 ## クエリパラメータ
 
