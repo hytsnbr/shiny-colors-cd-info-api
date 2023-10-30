@@ -5,7 +5,7 @@
   },
   "runArgs": [
     "--name",
-    "Deno_TEST"
+    "shiny-colors-cd-info-api"
   ],
   "postAttachCommand": "deno --version",
   "features": {
