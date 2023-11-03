@@ -3,7 +3,7 @@ name: Data Update
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 * * * *"
+    - cron: "0 0,6,12 * * *"
 
 # 多重起動防止
 concurrency:
