@@ -2,6 +2,11 @@
 
 ![deno deploy](https://img.shields.io/badge/deno-deploy-green?logo|deno)
 
+## 概要
+
+アイドルマスターシャイニーカラーズのCD情報をまとめたAPI  
+個人的に配信サイトと販売ショップを手軽に調べたかったので作成
+
 ## エンドポイント
 
 `https://shiny-colors-cd-info-api.deno.dev/list`
