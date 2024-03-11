@@ -150,6 +150,6 @@
     "https://deno.land/x/oak@v12.6.0/testing.ts": "37d684d57bb8e5150fb5eb2677e66b04dcb422709cf2c5a74c1df94d52aa02e2",
     "https://deno.land/x/oak@v12.6.0/util.ts": "0a3fdffb114859c2de84e1783efa3a544af4d2af8c6f08e0d25655de9d3e69bb",
     "https://deno.land/x/path_to_regexp@v6.2.1/index.ts": "894060567837bae8fc9c5cbd4d0a05e9024672083d5883b525c031eea940e556",
-    "https://raw.githubusercontent.com/hytsnbr/shiny-colors-cd-info-collector/main/result/data.json": "e1279e82fda56b8ff45f2b208e2b4071d2bc6ee6fedb50ab23e22e6d098e26e3"
+    "https://raw.githubusercontent.com/hytsnbr/shiny-colors-cd-info-collector/main/result/data.json": "b1da2e457585d094e175f0e9add0840d2a58b52ba58b63ca4b5095519e6a1242"
   }
 }
