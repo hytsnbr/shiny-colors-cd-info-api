@@ -1,4 +1,4 @@
-import { helpers, RouterContext } from "@/deps.ts";
+import { helpers, RouterContext } from "oak";
 import dataJsonConvertor from "@/functions/data_json_convertor.ts";
 import { CdInfo } from "@/model/cd_info.ts";
 import { CdInfoList } from "@/model/cd_info_list.ts";

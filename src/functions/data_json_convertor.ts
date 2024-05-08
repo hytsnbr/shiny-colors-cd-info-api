@@ -1,6 +1,8 @@
 import { CdInfoList } from "@/model/cd_info_list.ts";
 import { CdInfo } from "@/model/cd_info.ts";
-import { dataJson } from "@/deps.ts";
+import dataJson from "https://raw.githubusercontent.com/hytsnbr/shiny-colors-cd-info-collector/main/result/data.json" with {
+  type: "json",
+};
 
 export default () => {
   const jsonData = dataJson;

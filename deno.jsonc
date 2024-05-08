@@ -1,6 +1,9 @@
 {
   "imports": {
-    "@/": "./src/"
+    "@/": "./src/",
+    "oak": "https://deno.land/x/oak@v12.6.0/mod.ts",
+    "download": "https://deno.land/x/download@v2.0.2/mod.ts",
+    "dotenv": "https://deno.land/std@0.197.0/dotenv/load.ts"
   },
   "lint-staged": {
     "*": "deno lint && deno fmt"

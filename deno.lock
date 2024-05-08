@@ -122,6 +122,7 @@
     "https://deno.land/std@0.197.0/dotenv/load.ts": "0636983549b98f29ab75c9a22a42d9723f0a389ece5498fe971e7bb2556a12e2",
     "https://deno.land/std@0.197.0/dotenv/mod.ts": "ff7acf1c97ba57af512ecb6f9094fa96e1f63cca1960a7687616fa86bab7e356",
     "https://deno.land/x/download@v2.0.2/download.ts": "4c1e70b79a5eb47500c3cd048781c7d71063c906cd15a431f82f22950729e43c",
+    "https://deno.land/x/download@v2.0.2/mod.ts": "ec1649bc70d41898baa1123743486dba40612581d2478243fe45e875233f6b6a",
     "https://deno.land/x/download@v2.0.2/types.ts": "564477c37f19599cc336678c6d26e8d0dac35fcef76db680cc5f5657523c2f94",
     "https://deno.land/x/oak@v12.6.0/application.ts": "3028d3f6fa5ee743de013881550d054372c11d83c45099c2d794033786d27008",
     "https://deno.land/x/oak@v12.6.0/body.ts": "1899761b97fc9d776f3710b2637fb047ba29b968609afc6c0e5219b1108e703c",

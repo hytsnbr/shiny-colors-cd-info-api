@@ -1,5 +1,5 @@
 import { apiController } from "@/controllers/api_controller.ts";
-import { Router } from "@/deps.ts";
+import { Router } from "oak";
 
 const router = new Router();
 
