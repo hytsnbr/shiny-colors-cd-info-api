@@ -38,7 +38,7 @@ export class CdInfoList {
   }
 
   filterByLimited(limited: string) {
-    if (limited === undefined) {
+    if (limited === undefined || limited === "") {
       return this;
     }
 
@@ -58,7 +58,7 @@ export class CdInfoList {
   }
 
   filterByRecordNumbers(recordNumbers: string) {
-    if (recordNumbers === undefined) {
+    if (recordNumbers === undefined || recordNumbers === "") {
       return this;
     }
 
@@ -146,7 +146,7 @@ export class CdInfoList {
   }
 
   filterByHiResStore(isHiRes: string) {
-    if (isHiRes === undefined) {
+    if (isHiRes === undefined || isHiRes === "") {
       return this;
     }
 
