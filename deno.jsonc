@@ -10,13 +10,17 @@
   },
   "hooks_dir": ".hooks",
   "tasks": {
+    "init": "deno task git-config && deno task setup-hooks && deno task build",
     "start": "deno run --allow-net --allow-read --watch src/server.ts",
-    "build": "deno fmt && deno task cached",
+    "build": "deno fmt && deno task cached && deno test",
     "cached": "deno cache **/*/*.ts --lock-write",
     "ci": "deno lint && deno fmt --check",
     // git hooks
     "setup-hooks": "deno run --allow-read --allow-run https://pax.deno.dev/kawarimidoll/deno-dev-template/scripts/setup-hooks.ts",
     "pre-commit": "deno run --allow-read --allow-env --allow-run --allow-write https://pax.deno.dev/kawarimidoll/deno-dev-template/scripts/lint-staged.ts",
-    "pre-push": "deno task ci"
+    "pre-push": "deno task ci",
+    // git config
+    "git-config": "deno task auto-crlf",
+    "auto-crlf": "git config --global core.autocrlf false"
   }
 }

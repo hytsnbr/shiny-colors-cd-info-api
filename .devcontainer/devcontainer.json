@@ -7,10 +7,7 @@
     "--name",
     "shiny-colors-cd-info-api"
   ],
-  "postAttachCommand": "deno --version",
-  "features": {
-    "ghcr.io/dhoeric/features/act:1": {}
-  },
+  "postAttachCommand": "deno task init",
   // Configure tool-specific properties.
   "customizations": {
     // Configure properties specific to VS Code.
