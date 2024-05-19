@@ -37,7 +37,7 @@ Deno.test("アーティスト名検索テスト：複数件数ヒット", () => 
   let isContainNotMatchArtist = false;
   result.forEach((cdInfo) => {
     Logger.info(
-      `アーティスト名：${cdInfo.artist}`,
+      `アーティスト名：${cdInfo.artist} / CDタイトル名：${cdInfo.title}`,
     );
     if (isContainNotMatchArtist === false) {
       isContainNotMatchArtist = regexpArtist.test(cdInfo.artist) === false;
