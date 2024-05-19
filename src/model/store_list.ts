@@ -7,7 +7,7 @@ export class StoreList {
     this.list = list;
   }
 
-  filterByStoreName(storeName: string) {
+  filterByStoreName(storeName: string): StoreList {
     if (storeName === undefined || storeName === "") {
       return this;
     }
@@ -19,7 +19,7 @@ export class StoreList {
     return this;
   }
 
-  filterByHiResStore(isHiRes: string) {
+  filterByHiResStore(isHiRes: string): StoreList {
     if (isHiRes === undefined) {
       return this;
     }

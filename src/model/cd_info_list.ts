@@ -1,4 +1,5 @@
-import { getIsDuplicate, isValidDate } from "@/functions/date_util.ts";
+import { hasDuplicateValue } from "@/functions/array_util.ts";
+import { isValidDate } from "@/functions/date_util.ts";
 import { CdInfo } from "@/model/cd_info.ts";
 import { Store } from "@/model/store.ts";
 
@@ -13,31 +14,44 @@ export class CdInfoList {
     return this.list;
   }
 
-  filtersBySeries(series: string) {
+  filterBySeries(series: string): CdInfoList {
     if (series === undefined || series === "") {
       return this;
     }
 
-    this.list = this.list.filter((cdData: CdInfo) => {
-      return cdData.series === series;
+    this.list = this.list.filter((cdInfo: CdInfo) => {
+      return cdInfo.series === series;
     });
 
     return this;
   }
 
-  filterByTitle(title: string) {
+  filterByTitle(title: string): CdInfoList {
     if (title === undefined || title === "") {
       return this;
     }
 
-    this.list = this.list.filter((cdData: CdInfo) => {
-      return cdData.title.match(`.*${title}.*`);
+    this.list = this.list.filter((cdInfo: CdInfo) => {
+      return cdInfo.title.match(`.*${title}.*`);
     });
 
     return this;
   }
 
-  filterByLimited(limited: string) {
+  filterByArtist(artist: string): CdInfoList {
+    if (artist === undefined || artist === "") {
+      return this;
+    }
+    const artistRegexp = RegExp(`.*${artist}.*`);
+
+    this.list = this.list.filter((cdInfo: CdInfo) => {
+      return artistRegexp.test(cdInfo.artist);
+    });
+
+    return this;
+  }
+
+  filterByLimited(limited: string): CdInfoList {
     if (limited === undefined || limited === "") {
       return this;
     }
@@ -50,50 +64,50 @@ export class CdInfoList {
       return this;
     }
 
-    this.list = this.list.filter((cdData: CdInfo) => {
-      return cdData.limited == limitedValue;
+    this.list = this.list.filter((cdInfo: CdInfo) => {
+      return cdInfo.limited === limitedValue;
     });
 
     return this;
   }
 
-  filterByRecordNumbers(recordNumbers: string) {
+  filterByRecordNumbers(recordNumbers: string): CdInfoList {
     if (recordNumbers === undefined || recordNumbers === "") {
       return this;
     }
 
     const recordNumberList: string[] = recordNumbers
-      .replace(" ", "")
+      .replaceAll(" ", "")
       .split(",");
     if (recordNumberList.length === 0) {
       return this;
     }
 
-    this.list = this.list.filter((cdData: CdInfo) => {
-      return getIsDuplicate(cdData.recordNumbers, recordNumberList);
+    this.list = this.list.filter((cdInfo: CdInfo) => {
+      return hasDuplicateValue(cdInfo.recordNumbers, recordNumberList);
     });
 
     return this;
   }
 
-  filterByRecordNumber(recordNumber: string) {
+  filterByRecordNumber(recordNumber: string): CdInfoList {
     if (recordNumber === undefined || recordNumber === "") {
       return this;
     }
 
-    this.list = this.list.filter((cdData: CdInfo) => {
-      return cdData.recordNumbers.includes(recordNumber);
+    this.list = this.list.filter((cdInfo: CdInfo) => {
+      return cdInfo.recordNumbers.includes(recordNumber);
     });
 
     return this;
   }
 
-  filterByReleaseDate(startDate: string, endDate: string) {
+  filterByReleaseDate(startDate: string, endDate: string): CdInfoList {
     const releaseStartDate = new Date(startDate);
     const releaseEndDate = new Date(endDate);
 
-    this.list = this.list.filter((cdData: CdInfo) => {
-      if (cdData.releaseDate === null) {
+    this.list = this.list.filter((cdInfo: CdInfo) => {
+      if (cdInfo.releaseDate === null) {
         if (isValidDate(releaseStartDate) || isValidDate(releaseEndDate)) {
           return false;
         }
@@ -101,12 +115,12 @@ export class CdInfoList {
       }
 
       if (isValidDate(releaseStartDate) && isValidDate(releaseEndDate)) {
-        return releaseStartDate <= cdData.releaseDate &&
-          cdData.releaseDate <= releaseEndDate;
+        return releaseStartDate <= cdInfo.releaseDate &&
+          cdInfo.releaseDate <= releaseEndDate;
       } else if (isValidDate(releaseStartDate)) {
-        return releaseStartDate <= cdData.releaseDate;
+        return releaseStartDate <= cdInfo.releaseDate;
       } else if (isValidDate(releaseEndDate)) {
-        return cdData.releaseDate <= releaseEndDate;
+        return cdInfo.releaseDate <= releaseEndDate;
       }
 
       return true;
@@ -115,37 +129,37 @@ export class CdInfoList {
     return this;
   }
 
-  filterByStoreName(storeName: string) {
+  filterByStoreName(storeName: string): CdInfoList {
     if (storeName === undefined || storeName === "") {
       return this;
     }
+    const storeNameRegexp = RegExp(`.*${storeName}.*`);
 
-    this.list = this.list.filter((cdData: CdInfo) => {
+    this.list = this.list.filter((cdInfo: CdInfo) => {
+      cdInfo.downloadSiteList = cdInfo.downloadSiteList.filter(
+        (store: Store) => {
+          return storeNameRegexp.test(store.name);
+        },
+      );
+      cdInfo.purchaseSiteList = cdInfo.purchaseSiteList.filter(
+        (store: Store) => {
+          return storeNameRegexp.test(store.name);
+        },
+      );
       if (
-        cdData.downloadSiteList.length === 0 &&
-        cdData.purchaseSiteList.length === 0
+        cdInfo.downloadSiteList.length === 0 &&
+        cdInfo.purchaseSiteList.length === 0
       ) {
         return false;
       }
 
-      cdData.downloadSiteList = cdData.downloadSiteList.filter(
-        (store: Store) => {
-          return store.name.match(`.*${storeName}.*`);
-        },
-      );
-      cdData.purchaseSiteList = cdData.purchaseSiteList.filter(
-        (store: Store) => {
-          return store.name.match(`.*${storeName}.*`);
-        },
-      );
-
-      return cdData;
+      return cdInfo;
     });
 
     return this;
   }
 
-  filterByHiResStore(isHiRes: string) {
+  filterByHiResStore(isHiRes: string): CdInfoList {
     if (isHiRes === undefined || isHiRes === "") {
       return this;
     }
@@ -158,23 +172,25 @@ export class CdInfoList {
       return this;
     }
 
-    this.list = this.list.filter((cdData: CdInfo) => {
-      if (cdData.downloadSiteList.length === 0) {
+    this.list = this.list.filter((cdInfo: CdInfo) => {
+      cdInfo.downloadSiteList = cdInfo.downloadSiteList.filter(
+        (store: Store) => {
+          return store.isHiRes === isHiResValue;
+        },
+      );
+      cdInfo.purchaseSiteList = cdInfo.purchaseSiteList.filter(
+        (store: Store) => {
+          return store.isHiRes === isHiResValue;
+        },
+      );
+      if (
+        cdInfo.downloadSiteList.length === 0 &&
+        cdInfo.purchaseSiteList.length === 0
+      ) {
         return false;
       }
 
-      cdData.downloadSiteList = cdData.downloadSiteList.filter(
-        (store: Store) => {
-          return store.isHiRes === isHiResValue;
-        },
-      );
-      cdData.purchaseSiteList = cdData.purchaseSiteList.filter(
-        (store: Store) => {
-          return store.isHiRes === isHiResValue;
-        },
-      );
-
-      return cdData;
+      return cdInfo;
     });
 
     return this;

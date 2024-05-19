@@ -1,10 +1,11 @@
+import { Logger } from "@/logger.ts";
 import { router } from "@/router/router.ts";
-import { Application } from "oak";
+import { Application } from "@oak/oak";
 
 const app = new Application();
 
 app.addEventListener("listen", ({ hostname, port, secure }) => {
-  console.log(
+  Logger.info(
     `Listening on: ${secure ? "https://" : "http://"}${
       hostname ?? "localhost"
     }:${port}`,
