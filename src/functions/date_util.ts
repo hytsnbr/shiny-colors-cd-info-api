@@ -1,11 +1,5 @@
-export const isValidDate = (date: Date) => {
-  return Number.isNaN(date.getTime()) == false;
-};
-
-export const getIsDuplicate = (array1: string[], array2: string[]): boolean => {
-  return [...array1, ...array2].filter((item) =>
-    array1.includes(item) && array2.includes(item)
-  ).length > 0;
+export const isValidDate = (date: Date): boolean => {
+  return Number.isNaN(date.getTime()) === false;
 };
 
 export const formatDate = (date: Date | null): string => {
