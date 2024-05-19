@@ -37,6 +37,9 @@ jobs:
       - name: Run cached
         run: deno task cached
 
+      - name: Run test
+        run: deno test
+
       - name: Diff
         id: diff
         run: git diff --name-only --exit-code
