@@ -43,7 +43,8 @@
         "tamasfe.even-better-toml",
         "RapidAPI.vscode-rapidapi-client",
         "github.vscode-github-actions",
-        "rangav.vscode-thunder-client"
+        "rangav.vscode-thunder-client",
+        "jbockle.jbockle-format-files"
       ]
     }
   },
