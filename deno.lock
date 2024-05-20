@@ -9,6 +9,7 @@
       "jsr:@std/assert@^0.222.1": "jsr:@std/assert@0.222.1",
       "jsr:@std/assert@^0.223.0": "jsr:@std/assert@0.223.0",
       "jsr:@std/assert@^0.225.1": "jsr:@std/assert@0.225.2",
+      "jsr:@std/assert@^0.225.2": "jsr:@std/assert@0.225.2",
       "jsr:@std/bytes@0.222": "jsr:@std/bytes@0.222.1",
       "jsr:@std/bytes@0.223": "jsr:@std/bytes@0.223.0",
       "jsr:@std/bytes@^0.223.0": "jsr:@std/bytes@0.223.0",
@@ -157,7 +158,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@oak/oak@^16.0.0",
-      "jsr:@std/assert@^0.225.1",
+      "jsr:@std/assert@^0.225.2",
       "jsr:@std/dotenv@^0.224.0",
       "jsr:@std/log@^0.224.1"
     ]
