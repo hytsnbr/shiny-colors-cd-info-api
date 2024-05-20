@@ -126,7 +126,11 @@ Deno.test("リリース日検索テスト：複数件数ヒット", () => {
 Deno.test("リリース日検索テスト：範囲開始日指定", () => {
   const startDate = "2018-11-01";
   const endDate = "";
-  const expectedCount = dataJsonConvertor().getList().length - 5;
+  const expectedCount = dataJsonConvertor().getList()
+    .filter((cdInfo) => cdInfo.releaseDate !== null).length - 5;
+
+  const releaseDateNullCount = dataJsonConvertor().getList()
+    .filter((cdInfo) => cdInfo.releaseDate === null).length;
 
   const cdInfoList: CdInfoList = dataJsonConvertor();
   const result: CdInfo[] = cdInfoList.filterByReleaseDate(startDate, endDate)
@@ -136,7 +140,7 @@ Deno.test("リリース日検索テスト：範囲開始日指定", () => {
 
   Logger.info(`検索リリース日：${startDate} ～ ${endDate}`);
   Logger.info(
-    `ヒット件数：${actualCount} / 期待値（BRILLI@NT WINGシリーズの5枚を除く）：${expectedCount}`,
+    `ヒット件数：${actualCount} / 期待値（BRILLI@NT WINGシリーズの5枚、リリース日未設定の${releaseDateNullCount}枚を除く）：${expectedCount}`,
   );
 
   assertGreater(actualCount, 0);
