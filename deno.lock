@@ -17,7 +17,7 @@
       "jsr:@std/crypto@0.223": "jsr:@std/crypto@0.223.0",
       "jsr:@std/encoding@^0.222.1": "jsr:@std/encoding@0.222.1",
       "jsr:@std/encoding@^0.223.0": "jsr:@std/encoding@0.223.0",
-      "jsr:@std/fmt@^0.225.0": "jsr:@std/fmt@0.225.1",
+      "jsr:@std/fmt@^0.225.0": "jsr:@std/fmt@0.225.2",
       "jsr:@std/fs@^0.229.0": "jsr:@std/fs@0.229.1",
       "jsr:@std/http@0.222": "jsr:@std/http@0.222.1",
       "jsr:@std/http@0.223": "jsr:@std/http@0.223.0",
@@ -92,8 +92,8 @@
       "@std/encoding@0.223.0": {
         "integrity": "2b5615a75e00337ce113f34cf2f9b8c18182c751a8dcc8b1a2c2fc0e117bef00"
       },
-      "@std/fmt@0.225.1": {
-        "integrity": "44a8cb375d7344adb3cb0208b85ea0bde7cdc15224c11188c85e733834ffe356"
+      "@std/fmt@0.225.2": {
+        "integrity": "8a2d157586372f9d5e74cdf0f463a828dee5d09d7de10e56394d8f20dbb5bf26"
       },
       "@std/fs@0.229.1": {
         "integrity": "38d3fb31f0ca0a8c1118e039939188f32e291a3f7f17dc0868fec22024bdfadd"
