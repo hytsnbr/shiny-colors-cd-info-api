@@ -2,8 +2,8 @@
   "version": "3",
   "packages": {
     "specifiers": {
-      "jsr:@oak/commons@0.10": "jsr:@oak/commons@0.10.2",
-      "jsr:@oak/oak@^16.0.0": "jsr:@oak/oak@16.0.0",
+      "jsr:@oak/commons@0.11": "jsr:@oak/commons@0.11.0",
+      "jsr:@oak/oak@^16.0.0": "jsr:@oak/oak@16.1.0",
       "jsr:@std/assert@0.223": "jsr:@std/assert@0.223.0",
       "jsr:@std/assert@0.226": "jsr:@std/assert@0.226.0",
       "jsr:@std/assert@^0.223.0": "jsr:@std/assert@0.223.0",
@@ -30,8 +30,8 @@
       "npm:path-to-regexp@6.2.1": "npm:path-to-regexp@6.2.1"
     },
     "jsr": {
-      "@oak/commons@0.10.2": {
-        "integrity": "f47aebe12c3c73372ebe96250dbcd469d11f9e9df0cd89169d245bf674a347d5",
+      "@oak/commons@0.11.0": {
+        "integrity": "07702bfe5c07cd8144c422022994da1f9fea466b185824f4be63a2b1b1a65125",
         "dependencies": [
           "jsr:@std/assert@0.226",
           "jsr:@std/bytes@0.224",
@@ -40,10 +40,10 @@
           "jsr:@std/media-types@0.224"
         ]
       },
-      "@oak/oak@16.0.0": {
-        "integrity": "a98756fb4bf69f728c9a5179ff4157620946c5969bcaa3d6bd64cca8b198f74e",
+      "@oak/oak@16.1.0": {
+        "integrity": "ab21506555fffeb08dc8f45ff5d28607e8087949ff58bd2964b27df65994480b",
         "dependencies": [
-          "jsr:@oak/commons@0.10",
+          "jsr:@oak/commons@0.11",
           "jsr:@std/assert@0.223",
           "jsr:@std/bytes@0.223",
           "jsr:@std/crypto@0.223",
