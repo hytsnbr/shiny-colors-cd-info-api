@@ -17,7 +17,7 @@
       "jsr:@std/encoding@1.0.0-rc.2": "jsr:@std/encoding@1.0.0-rc.2",
       "jsr:@std/encoding@^0.223.0": "jsr:@std/encoding@0.223.0",
       "jsr:@std/fmt@^0.225.4": "jsr:@std/fmt@0.225.4",
-      "jsr:@std/fs@^0.229.2": "jsr:@std/fs@0.229.2",
+      "jsr:@std/fs@^0.229.2": "jsr:@std/fs@0.229.3",
       "jsr:@std/http@0.223": "jsr:@std/http@0.223.0",
       "jsr:@std/http@0.224": "jsr:@std/http@0.224.4",
       "jsr:@std/internal@^1.0.0": "jsr:@std/internal@1.0.0",
@@ -94,8 +94,8 @@
       "@std/fmt@0.225.4": {
         "integrity": "584c681cf422b70e28959b57e59012823609c087384cbf12d05f67814797fda3"
       },
-      "@std/fs@0.229.2": {
-        "integrity": "c15dd65678fc3b9e5465b83cfbb1f3bb34d158ef4347f2afa0b759cce8c51bd9"
+      "@std/fs@0.229.3": {
+        "integrity": "783bca21f24da92e04c3893c9e79653227ab016c48e96b3078377ebd5222e6eb"
       },
       "@std/http@0.223.0": {
         "integrity": "15ab8a0c5a7e9d5be017a15b01600f20f66602ceec48b378939fa24fcec522aa",
