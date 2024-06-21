@@ -27,7 +27,7 @@ jobs:
           echo "branch_name=data_update/update_`date '+%Y-%m-%d_%H-%M-%S'`" >> "$GITHUB_ENV"
 
       - name: Checkout Repo
-        uses: actions/checkout@v4.1.6
+        uses: actions/checkout@v4.1.7
         with:
           fetch-depth: 0
       
