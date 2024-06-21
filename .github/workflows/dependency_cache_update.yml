@@ -21,12 +21,12 @@ jobs:
           echo "process_date=`date '+%Y-%m-%d %H:%M:%S'`" >> "$GITHUB_ENV"
 
       - name: Checkout Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.6
         with:
           fetch-depth: 0
 
       - name: Deno Setup
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v1.1.4
 
       - name: Run cached
         run: deno task cached
