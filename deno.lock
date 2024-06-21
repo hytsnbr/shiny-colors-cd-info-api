@@ -23,7 +23,7 @@
       "jsr:@std/internal@^1.0.0": "jsr:@std/internal@1.0.0",
       "jsr:@std/io@0.223": "jsr:@std/io@0.223.0",
       "jsr:@std/io@^0.224.2": "jsr:@std/io@0.224.2",
-      "jsr:@std/log@^0.224.2": "jsr:@std/log@0.224.3",
+      "jsr:@std/log@^0.224.3": "jsr:@std/log@0.224.3",
       "jsr:@std/media-types@0.223": "jsr:@std/media-types@0.223.0",
       "jsr:@std/media-types@0.224": "jsr:@std/media-types@0.224.1",
       "jsr:@std/path@0.223": "jsr:@std/path@0.223.0",
@@ -158,7 +158,7 @@
       "jsr:@oak/oak@^16.1.0",
       "jsr:@std/assert@^0.226.0",
       "jsr:@std/dotenv@^0.224.0",
-      "jsr:@std/log@^0.224.2"
+      "jsr:@std/log@^0.224.3"
     ]
   }
 }
