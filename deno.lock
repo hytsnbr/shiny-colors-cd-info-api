@@ -23,7 +23,7 @@
       "jsr:@std/internal@^1.0.0": "jsr:@std/internal@1.0.1",
       "jsr:@std/io@0.223": "jsr:@std/io@0.223.0",
       "jsr:@std/io@^0.224.3": "jsr:@std/io@0.224.3",
-      "jsr:@std/log@^0.224.3": "jsr:@std/log@0.224.4",
+      "jsr:@std/log@^0.224.4": "jsr:@std/log@0.224.4",
       "jsr:@std/media-types@0.223": "jsr:@std/media-types@0.223.0",
       "jsr:@std/media-types@0.224": "jsr:@std/media-types@0.224.1",
       "jsr:@std/path@0.223": "jsr:@std/path@0.223.0",
@@ -151,14 +151,14 @@
     }
   },
   "remote": {
-    "https://raw.githubusercontent.com/hytsnbr/shiny-colors-cd-info-collector/main/result/data.json": "074b515d4d2724adf2166e98c89a5f169c51cf4a0f4ced7e01f25552628ca32e"
+    "https://raw.githubusercontent.com/hytsnbr/shiny-colors-cd-info-collector/main/result/data.json": "01192974b41d3357e01df92bfab4b8bedb51a2ffd7394c3bd112a7462454cb49"
   },
   "workspace": {
     "dependencies": [
       "jsr:@oak/oak@^16.1.0",
       "jsr:@std/assert@^0.226.0",
       "jsr:@std/dotenv@^0.224.2",
-      "jsr:@std/log@^0.224.3"
+      "jsr:@std/log@^0.224.4"
     ]
   }
 }
