@@ -26,7 +26,7 @@ jobs:
           fetch-depth: 0
 
       - name: Deno Setup
-        uses: denoland/setup-deno@v1.1.4
+        uses: denoland/setup-deno@v1.2.0
 
       - name: Run cached
         run: deno task cached
