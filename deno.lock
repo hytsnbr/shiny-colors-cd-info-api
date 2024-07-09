@@ -16,8 +16,8 @@
       "jsr:@std/crypto@0.224": "jsr:@std/crypto@0.224.0",
       "jsr:@std/encoding@1.0.0-rc.2": "jsr:@std/encoding@1.0.0-rc.2",
       "jsr:@std/encoding@^0.223.0": "jsr:@std/encoding@0.223.0",
-      "jsr:@std/fmt@^0.225.5": "jsr:@std/fmt@0.225.5",
-      "jsr:@std/fs@^1.0.0-rc.3": "jsr:@std/fs@1.0.0-rc.3",
+      "jsr:@std/fmt@^0.225.5": "jsr:@std/fmt@0.225.6",
+      "jsr:@std/fs@^1.0.0-rc.3": "jsr:@std/fs@1.0.0-rc.4",
       "jsr:@std/http@0.223": "jsr:@std/http@0.223.0",
       "jsr:@std/http@0.224": "jsr:@std/http@0.224.5",
       "jsr:@std/internal@^1.0.0": "jsr:@std/internal@1.0.1",
@@ -91,11 +91,11 @@
       "@std/encoding@1.0.0-rc.2": {
         "integrity": "160d7674a20ebfbccdf610b3801fee91cf6e42d1c106dd46bbaf46e395cd35ef"
       },
-      "@std/fmt@0.225.5": {
-        "integrity": "38aa42528584873378a521f7842c1a1e99f0235d3f7d3db5ca02795312f439b8"
+      "@std/fmt@0.225.6": {
+        "integrity": "aba6aea27f66813cecfd9484e074a9e9845782ab0685c030e453a8a70b37afc8"
       },
-      "@std/fs@1.0.0-rc.3": {
-        "integrity": "50a0a4366e7e2bd444ed0831757e3d9dd39b1d24612764bbb9ac7725169903f4"
+      "@std/fs@1.0.0-rc.4": {
+        "integrity": "7f97a43fcb807dff8580569be938274b42217a1cf2b56c7f6b0436985ab79adc"
       },
       "@std/http@0.223.0": {
         "integrity": "15ab8a0c5a7e9d5be017a15b01600f20f66602ceec48b378939fa24fcec522aa",
