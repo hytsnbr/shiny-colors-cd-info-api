@@ -151,7 +151,7 @@
     }
   },
   "remote": {
-    "https://raw.githubusercontent.com/hytsnbr/shiny-colors-cd-info-collector/main/result/data.json": "d3681ae0740658426a1ab12b093509597353400fc8cc59ec119a62b31e6e90b6"
+    "https://raw.githubusercontent.com/hytsnbr/shiny-colors-cd-info-collector/main/result/data.json": "de11c324593dd19a8ffff2238b05dd56f971ecab6c5c9e050e7917ec489f2b85"
   },
   "workspace": {
     "dependencies": [
