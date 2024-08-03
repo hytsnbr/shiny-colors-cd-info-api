@@ -78,14 +78,8 @@ jobs:
             --body "${{ env.process_date }} 時点 更新データ" \
             --label "${{ env.LABEL_NAME }}"
         continue-on-error: true
-        
-      - name: Enable automatically delete merged branche
-        run: gh repo edit --delete-branch-on-merge=true
-        
+
       - name: Merge Pull Request
         run: |
           gh pr merge ${{ steps.cpr.outputs.pull-request-url }} --merge
         continue-on-error: true
-        
-      - name: Disable automatically delete merged branche
-        run: gh repo edit --delete-branch-on-merge=false
