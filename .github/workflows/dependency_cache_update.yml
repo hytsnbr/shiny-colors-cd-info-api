@@ -1,9 +1,14 @@
 name: Dependency Cache Update
 
-on: 
-  push:
-    branches:
-      - dependency/*
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+# 多重起動防止
+concurrency:
+  group: "dependency_cache_update"
+  cancel-in-progress: true
 
 jobs:
   dependency-cache-update:
@@ -19,6 +24,7 @@ jobs:
           TZ: "Asia/Tokyo" # タイムゾーン指定
         run: |
           echo "process_date=`date '+%Y-%m-%d %H:%M:%S'`" >> "$GITHUB_ENV"
+          echo "branch_name=dependency_cache_update/update_`date '+%Y-%m-%d_%H-%M-%S'`" >> "$GITHUB_ENV"
 
       - name: Checkout Repo
         uses: actions/checkout@v4.1.7
@@ -31,10 +37,16 @@ jobs:
       - name: Run cached
         run: deno task cached
 
+      - name: Run test
+        run: deno test
+
       - name: Diff
         id: diff
         run: git diff --name-only --exit-code
         continue-on-error: true
+
+      - name: Create Branch & Checkout
+        run: git checkout -b "${{ env.branch_name }}"
 
       - name: Commit & Push
         id: commit_push
@@ -44,5 +56,36 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .
-          git commit -m "chore(dependency cache): Cache Updated at ${{ env.process_date }}"
+          git commit -m "Update: ${{ env.process_date }}"
           git push --set-upstream origin ${{ env.branch_name }}
+
+      - name: Label Create
+        run: |
+          gh label create "${{ env.LABEL_NAME }}" \
+            --color "#5d9469" \
+            --description "${{ env.LABEL_NAME }}" \
+            --force
+        continue-on-error: true
+
+      - name: Create Pull Request
+        id: cpr
+        run: |
+          gh pr create \
+            --assignee hytsnbr \
+            --reviewer hytsnbr \
+            --base main \
+            --title "chore(dependency cache): Cache Updated at ${{ env.process_date }}" \
+            --body "${{ env.process_date }} 時点 更新データ" \
+            --label "${{ env.LABEL_NAME }}"
+        continue-on-error: true
+        
+      - name: Enable automatically delete merged branche
+        run: gh repo edit --delete-branch-on-merge=true
+        
+      - name: Merge Pull Request
+        run: |
+          gh pr merge ${{ steps.cpr.outputs.pull-request-url }} --merge
+        continue-on-error: true
+        
+      - name: Disable automatically delete merged branche
+        run: gh repo edit --delete-branch-on-merge=false
