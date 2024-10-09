@@ -3,7 +3,7 @@
   "packages": {
     "specifiers": {
       "jsr:@oak/commons@^1.0": "jsr:@oak/commons@1.0.0",
-      "jsr:@oak/oak@^17.0.0": "jsr:@oak/oak@17.0.0",
+      "jsr:@oak/oak@^17.0.0": "jsr:@oak/oak@17.1.0",
       "jsr:@std/assert@^1.0": "jsr:@std/assert@1.0.6",
       "jsr:@std/assert@^1.0.6": "jsr:@std/assert@1.0.6",
       "jsr:@std/bytes@^1.0": "jsr:@std/bytes@1.0.2",
@@ -34,8 +34,8 @@
           "jsr:@std/media-types@^1.0"
         ]
       },
-      "@oak/oak@17.0.0": {
-        "integrity": "1be33e585080d8ce5093963469a05ed265f1d5f139421c9b0fda8419a533ebee",
+      "@oak/oak@17.1.0": {
+        "integrity": "14ffb400c3c268bdc7b3a838664fab782b4ed35bb0dfe7669013c95bb12a9503",
         "dependencies": [
           "jsr:@oak/commons@^1.0",
           "jsr:@std/assert@^1.0",
@@ -107,7 +107,7 @@
     }
   },
   "remote": {
-    "https://raw.githubusercontent.com/hytsnbr/shiny-colors-cd-info-collector/main/result/data.json": "5d81037816916708860e22b6887216d5c8aa2a7cb1789e80635fb83912bc1070"
+    "https://raw.githubusercontent.com/hytsnbr/shiny-colors-cd-info-collector/main/result/data.json": "91bca9c18300e2057b755d850accee383468dccc4feed40cf77389f8dc6b4753"
   },
   "workspace": {
     "dependencies": [
