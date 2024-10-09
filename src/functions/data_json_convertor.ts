@@ -11,15 +11,15 @@ export default (): CdInfoList => {
   Array.from(jsonData.info).forEach((info) => {
     resultList.push(
       new CdInfo(
-        info.title,
-        info.recordNumbers,
+        info.title !== null ? info.title : "",
+        info.recordNumbers !== null ? info.recordNumbers : [],
         info.releaseDate !== null ? new Date(info.releaseDate) : null,
-        info.jacketUrl,
+        info.jacketUrl !== null ? info.jacketUrl : "",
         info.limited,
-        info.series,
-        info.artist,
-        info.downloadSiteList,
-        info.purchaseSiteList,
+        info.series !== null ? info.series : "",
+        info.artist !== null ? info.artist : "",
+        info.downloadSiteList !== null ? info.downloadSiteList : [],
+        info.purchaseSiteList !== null ? info.purchaseSiteList : [],
       ),
     );
   });
