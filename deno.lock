@@ -4,7 +4,7 @@
     "jsr:@oak/commons@1": "1.0.0",
     "jsr:@oak/oak@17.1.3": "17.1.3",
     "jsr:@std/assert@1": "1.0.7",
-    "jsr:@std/assert@1.0.6": "1.0.6",
+    "jsr:@std/assert@1.0.7": "1.0.7",
     "jsr:@std/bytes@1": "1.0.3",
     "jsr:@std/bytes@^1.0.2": "1.0.3",
     "jsr:@std/crypto@1": "1.0.3",
@@ -13,7 +13,7 @@
     "jsr:@std/fmt@^1.0.2": "1.0.3",
     "jsr:@std/fs@^1.0.4": "1.0.5",
     "jsr:@std/http@1": "1.0.9",
-    "jsr:@std/internal@^1.0.4": "1.0.5",
+    "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/io@0.224": "0.224.9",
     "jsr:@std/io@0.225": "0.225.0",
     "jsr:@std/log@0.224.9": "0.224.9",
@@ -47,14 +47,11 @@
         "npm:path-to-regexp"
       ]
     },
-    "@std/assert@1.0.6": {
-      "integrity": "1904c05806a25d94fe791d6d883b685c9e2dcd60e4f9fc30f4fc5cf010c72207",
+    "@std/assert@1.0.7": {
+      "integrity": "64ce9fac879e0b9f3042a89b3c3f8ccfc9c984391af19e2087513a79d73e28c3",
       "dependencies": [
         "jsr:@std/internal"
       ]
-    },
-    "@std/assert@1.0.7": {
-      "integrity": "64ce9fac879e0b9f3042a89b3c3f8ccfc9c984391af19e2087513a79d73e28c3"
     },
     "@std/bytes@1.0.3": {
       "integrity": "e5d5b9e685966314e4edb4be60dfc4bd7624a075bfd4ec8109252b4320f76452"
@@ -115,7 +112,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@oak/oak@17.1.3",
-      "jsr:@std/assert@1.0.6",
+      "jsr:@std/assert@1.0.7",
       "jsr:@std/dotenv@0.225.2",
       "jsr:@std/log@0.224.9"
     ]
