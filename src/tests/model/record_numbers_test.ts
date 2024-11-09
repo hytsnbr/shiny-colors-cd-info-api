@@ -1,10 +1,12 @@
-import dataJsonConvertor from "@/functions/data_json_convertor.ts";
+import { getCdInfoListFromGithub } from "@/functions/data_json_convertor.ts";
 import { Logger } from "@/logger.ts";
 import { CdInfo } from "@/model/cd_info.ts";
 import { CdInfoList } from "@/model/cd_info_list.ts";
 import { assertEquals, assertFalse } from "@std/assert";
 
-Deno.test("品番検索テスト：ヒットあり（複数指定、存在する品番のみ）", () => {
+Deno.test("品番検索テスト：ヒットあり（複数指定、存在する品番のみ）", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const recordNumbers =
     "LACM-24361, LACM-24362, LACM-24363, LACM-24364, LACM-24365, LACM-24366, LACM-24367, LACM-24368";
   const expectedCount = 8;
@@ -43,11 +45,9 @@ Deno.test("品番検索テスト：ヒットあり（複数指定、存在する
     },
   ];
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByRecordNumbers(recordNumbers)
+  const filteringResult: CdInfo[] = source.filterByRecordNumbers(recordNumbers)
     .getList();
-
-  const actualCount = result.length;
+  const actualCount = filteringResult.length;
 
   Logger.info(`検索品番：${recordNumbers}`);
   Logger.info(`ヒット件数：${actualCount} / 期待値：${expectedCount}`);
@@ -55,7 +55,7 @@ Deno.test("品番検索テスト：ヒットあり（複数指定、存在する
   assertEquals(actualCount, expectedCount);
 
   let isContainNotMatchRecordNumber = false;
-  result.forEach((cdInfo) => {
+  filteringResult.forEach((cdInfo) => {
     const expectedData = expectedDataList.find((data) => {
       return data.title === cdInfo.title &&
         cdInfo.recordNumbers.some((recordNumber) =>
@@ -80,7 +80,9 @@ Deno.test("品番検索テスト：ヒットあり（複数指定、存在する
   assertFalse(isContainNotMatchRecordNumber);
 });
 
-Deno.test("品番検索テスト：ヒットあり（複数指定、存在しない品番を含む）", () => {
+Deno.test("品番検索テスト：ヒットあり（複数指定、存在しない品番を含む）", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const recordNumbers = "LACM-24437, LACM-12345, LACM-24406";
   const expectedCount = 2;
   const expectedDataList = [
@@ -94,11 +96,9 @@ Deno.test("品番検索テスト：ヒットあり（複数指定、存在しな
     },
   ];
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByRecordNumbers(recordNumbers)
+  const filteringResult: CdInfo[] = source.filterByRecordNumbers(recordNumbers)
     .getList();
-
-  const actualCount = result.length;
+  const actualCount = filteringResult.length;
 
   Logger.info(`検索品番：${recordNumbers}`);
   Logger.info(`ヒット件数：${actualCount} / 期待値：${expectedCount}`);
@@ -106,7 +106,7 @@ Deno.test("品番検索テスト：ヒットあり（複数指定、存在しな
   assertEquals(actualCount, expectedCount);
 
   let isContainNotMatchRecordNumber = false;
-  result.forEach((cdInfo) => {
+  filteringResult.forEach((cdInfo) => {
     const expectedData = expectedDataList.find((data) => {
       return data.title === cdInfo.title &&
         cdInfo.recordNumbers.some((recordNumber) =>
@@ -131,15 +131,15 @@ Deno.test("品番検索テスト：ヒットあり（複数指定、存在しな
   assertFalse(isContainNotMatchRecordNumber);
 });
 
-Deno.test("品番検索テスト：ヒットなし（複数指定）", () => {
+Deno.test("品番検索テスト：ヒットなし（複数指定）", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const recordNumber = "LACM-12345, LACM-67890, LACZ-1215";
   const expected = 0;
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByRecordNumber(recordNumber)
+  const filteringResult: CdInfo[] = source.filterByRecordNumber(recordNumber)
     .getList();
-
-  const actual = result.length;
+  const actual = filteringResult.length;
 
   Logger.info(`検索品番：${recordNumber}`);
   Logger.info(`ヒット件数：${actual} / 期待値：${expected}`);

@@ -1,4 +1,4 @@
-import dataJsonConvertor from "@/functions/data_json_convertor.ts";
+import { getCdInfoListFromGithub } from "@/functions/data_json_convertor.ts";
 import { formatDate } from "@/functions/date_util.ts";
 import { Logger } from "@/logger.ts";
 import { CdInfo } from "@/model/cd_info.ts";
@@ -10,18 +10,19 @@ import {
   assertLessOrEqual,
 } from "@std/assert";
 
-Deno.test("リリース日検索テスト：1件だけヒット（1日指定）", () => {
+Deno.test("リリース日検索テスト：1件だけヒット（1日指定）", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const date = "2023-11-8";
   const expectedCount = 1;
   const expectedReleaseDate = new Date(date);
   const expectedTitle = "THE IDOLM@STER SHINY COLORS “CANVAS” 08";
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByReleaseDate(date, date).getList();
-
-  const actualCount = result.length;
-  const actualReleaseDate = result[0].releaseDate;
-  const actualTitle = result[0].title;
+  const filteringResult: CdInfo[] = source.filterByReleaseDate(date, date)
+    .getList();
+  const actualCount = filteringResult.length;
+  const actualReleaseDate = filteringResult[0].releaseDate;
+  const actualTitle = filteringResult[0].title;
 
   Logger.info(`検索リリース日：${date}`);
   Logger.info(`ヒット件数：${actualCount} / 期待値：${expectedCount}`);
@@ -37,20 +38,23 @@ Deno.test("リリース日検索テスト：1件だけヒット（1日指定）"
   assertEquals(actualTitle, expectedTitle);
 });
 
-Deno.test("リリース日検索テスト：1件だけヒット（範囲日指定）", () => {
+Deno.test("リリース日検索テスト：1件だけヒット（範囲日指定）", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const startDate = "2023-08-01";
   const endDate = "2023-09-01";
   const expectedCount = 1;
   const expectedReleaseDate = new Date("2023-08-09");
   const expectedTitle = "THE IDOLM@STER SHINY COLORS “CANVAS” 05";
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByReleaseDate(startDate, endDate)
+  const filteringResult: CdInfo[] = source.filterByReleaseDate(
+    startDate,
+    endDate,
+  )
     .getList();
-
-  const actualCount = result.length;
-  const actualReleaseDate = result[0].releaseDate;
-  const actualTitle = result[0].title;
+  const actualCount = filteringResult.length;
+  const actualReleaseDate = filteringResult[0].releaseDate;
+  const actualTitle = filteringResult[0].title;
 
   Logger.info(`検索リリース日：${startDate} ～ ${endDate}`);
   Logger.info(`ヒット件数：${actualCount} / 期待値：${expectedCount}`);
@@ -66,7 +70,9 @@ Deno.test("リリース日検索テスト：1件だけヒット（範囲日指�
   assertEquals(actualTitle, expectedTitle);
 });
 
-Deno.test("リリース日検索テスト：複数件数ヒット", () => {
+Deno.test("リリース日検索テスト：複数件数ヒット", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const startDate = "2021-07-01";
   const endDate = "2021-10-01";
   const expectedCount = 4;
@@ -90,11 +96,12 @@ Deno.test("リリース日検索テスト：複数件数ヒット", () => {
     },
   ];
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByReleaseDate(startDate, endDate)
+  const filteringResult: CdInfo[] = source.filterByReleaseDate(
+    startDate,
+    endDate,
+  )
     .getList();
-
-  const actualCount = result.length;
+  const actualCount = filteringResult.length;
 
   Logger.info(`検索リリース日：${startDate} ～ ${endDate}`);
   Logger.info(`ヒット件数：${actualCount} / 期待値：${expectedCount}`);
@@ -102,7 +109,7 @@ Deno.test("リリース日検索テスト：複数件数ヒット", () => {
   assertEquals(actualCount, expectedCount);
 
   let isNotContained = false;
-  result.forEach((cdInfo) => {
+  filteringResult.forEach((cdInfo) => {
     const expectedData = expectedDataList.find((data) => {
       return data.title === cdInfo.title &&
         formatDate(data.releaseDate) === formatDate(cdInfo.releaseDate);
@@ -123,20 +130,24 @@ Deno.test("リリース日検索テスト：複数件数ヒット", () => {
   assertFalse(isNotContained);
 });
 
-Deno.test("リリース日検索テスト：範囲開始日指定", () => {
+Deno.test("リリース日検索テスト：範囲開始日指定", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+  const cdInfoAll: CdInfo[] = source.getList();
+
   const startDate = "2018-11-01";
   const endDate = "";
-  const expectedCount = dataJsonConvertor().getList()
+  const expectedCount = cdInfoAll
     .filter((cdInfo) => cdInfo.releaseDate !== null).length - 5;
 
-  const releaseDateNullCount = dataJsonConvertor().getList()
+  const releaseDateNullCount = cdInfoAll
     .filter((cdInfo) => cdInfo.releaseDate === null).length;
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByReleaseDate(startDate, endDate)
+  const filteringResult: CdInfo[] = source.filterByReleaseDate(
+    startDate,
+    endDate,
+  )
     .getList();
-
-  const actualCount = result.length;
+  const actualCount = filteringResult.length;
 
   Logger.info(`検索リリース日：${startDate} ～ ${endDate}`);
   Logger.info(
@@ -147,7 +158,9 @@ Deno.test("リリース日検索テスト：範囲開始日指定", () => {
   assertLessOrEqual(actualCount, expectedCount);
 });
 
-Deno.test("リリース日検索テスト：範囲終了日指定", () => {
+Deno.test("リリース日検索テスト：範囲終了日指定", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const startDate = "";
   const endDate = "2018-10-31";
   const expectedCount = 5;
@@ -178,11 +191,12 @@ Deno.test("リリース日検索テスト：範囲終了日指定", () => {
     },
   ];
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByReleaseDate(startDate, endDate)
+  const filteringResult: CdInfo[] = source.filterByReleaseDate(
+    startDate,
+    endDate,
+  )
     .getList();
-
-  const actualCount = result.length;
+  const actualCount = filteringResult.length;
 
   Logger.info(`検索リリース日：${startDate} ～ ${endDate}`);
   Logger.info(`ヒット件数：${actualCount} / 期待値：${expectedCount}`);
@@ -190,7 +204,7 @@ Deno.test("リリース日検索テスト：範囲終了日指定", () => {
   assertEquals(actualCount, expectedCount);
 
   let isNotContained = false;
-  result.forEach((cdInfo) => {
+  filteringResult.forEach((cdInfo) => {
     const expectedData = expectedDataList.find((data) => {
       return data.title === cdInfo.title &&
         formatDate(data.releaseDate) === formatDate(cdInfo.releaseDate);
@@ -211,14 +225,15 @@ Deno.test("リリース日検索テスト：範囲終了日指定", () => {
   assertFalse(isNotContained);
 });
 
-Deno.test("リリース日検索テスト：ヒットなし（1日指定）", () => {
+Deno.test("リリース日検索テスト：ヒットなし（1日指定）", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const date = "2023-01-01";
   const expectedCount = 0;
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByReleaseDate(date, date).getList();
-
-  const actualCount = result.length;
+  const filteringResult: CdInfo[] = source.filterByReleaseDate(date, date)
+    .getList();
+  const actualCount = filteringResult.length;
 
   Logger.info(`検索リリース日：${date}`);
   Logger.info(`ヒット件数：${actualCount} / 期待値：${expectedCount}`);
@@ -226,16 +241,19 @@ Deno.test("リリース日検索テスト：ヒットなし（1日指定）", ()
   assertEquals(actualCount, expectedCount);
 });
 
-Deno.test("リリース日検索テスト：ヒットなし（範囲日指定）", () => {
+Deno.test("リリース日検索テスト：ヒットなし（範囲日指定）", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const startDate = "2019-01-01";
   const endDate = "2019-03-01";
   const expectedCount = 0;
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByReleaseDate(startDate, endDate)
+  const filteringResult: CdInfo[] = source.filterByReleaseDate(
+    startDate,
+    endDate,
+  )
     .getList();
-
-  const actualCount = result.length;
+  const actualCount = filteringResult.length;
 
   Logger.info(`検索リリース日：${startDate} ～ ${endDate}`);
   Logger.info(`ヒット件数：${actualCount} / 期待値：${expectedCount}`);

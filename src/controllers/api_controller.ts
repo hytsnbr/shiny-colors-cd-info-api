@@ -1,11 +1,11 @@
-import dataJsonConvertor from "@/functions/data_json_convertor.ts";
 import { CdInfo } from "@/model/cd_info.ts";
 import { CdInfoList } from "@/model/cd_info_list.ts";
 import { Response } from "@/model/response.ts";
 import { RouterContext } from "@oak/oak";
+import { getCdInfoListFromGithub } from "@/functions/data_json_convertor.ts";
 
 export const apiController = {
-  getList(ctx: RouterContext<string>): void {
+  async getList(ctx: RouterContext<string>): Promise<void> {
     const searchParams = ctx.request.url.searchParams;
     const releaseDateStart = searchParams.get("releaseDateStart") || "";
     const releaseDateEnd = searchParams.get("releaseDateEnd") || "";
@@ -18,7 +18,7 @@ export const apiController = {
     const storeName = searchParams.get("storeName") || "";
     const isHiRes = searchParams.get("isHiRes") || "";
 
-    const cdInfoList: CdInfoList = dataJsonConvertor();
+    const cdInfoList: CdInfoList = await getCdInfoListFromGithub();
     const result: CdInfo[] = cdInfoList
       .filterByTitle(title)
       .filterByArtist(artist)

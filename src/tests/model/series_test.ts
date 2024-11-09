@@ -1,16 +1,17 @@
-import dataJsonConvertor from "@/functions/data_json_convertor.ts";
+import { getCdInfoListFromGithub } from "@/functions/data_json_convertor.ts";
 import { Logger } from "@/logger.ts";
 import { CdInfo } from "@/model/cd_info.ts";
 import { CdInfoList } from "@/model/cd_info_list.ts";
 import { assertEquals, assertFalse } from "@std/assert";
 
-Deno.test("シリーズ名検索テスト：1件だけヒット", () => {
+Deno.test("シリーズ名検索テスト：1件だけヒット", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const series = "SE@SONAL WINTER";
   const expectedCount = 1;
   const expectedSeries = series;
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterBySeries(series).getList();
+  const result: CdInfo[] = source.filterBySeries(series).getList();
 
   const actualCount = result.length;
   const actualSeries = result[0].series;
@@ -25,13 +26,14 @@ Deno.test("シリーズ名検索テスト：1件だけヒット", () => {
   assertEquals(actualSeries, expectedSeries);
 });
 
-Deno.test("シリーズ名検索テスト：複数件数ヒット", () => {
+Deno.test("シリーズ名検索テスト：複数件数ヒット", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const series = "GR@DATE WING";
   const expectedCount = 7;
   const expectedSeries = series;
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterBySeries(series).getList();
+  const result: CdInfo[] = source.filterBySeries(series).getList();
 
   const actualCount = result.length;
 
@@ -51,12 +53,13 @@ Deno.test("シリーズ名検索テスト：複数件数ヒット", () => {
   assertFalse(isContainNotMatchSeries);
 });
 
-Deno.test("シリーズ名検索テスト：ヒットなし", () => {
+Deno.test("シリーズ名検索テスト：ヒットなし", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const series = "ABCD";
   const expected = 0;
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterBySeries(series).getList();
+  const result: CdInfo[] = source.filterBySeries(series).getList();
 
   const actual = result.length;
 

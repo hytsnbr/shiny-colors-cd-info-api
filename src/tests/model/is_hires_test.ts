@@ -1,4 +1,4 @@
-import dataJsonConvertor from "@/functions/data_json_convertor.ts";
+import { getCdInfoListFromGithub } from "@/functions/data_json_convertor.ts";
 import { Logger } from "@/logger.ts";
 import { CdInfo } from "@/model/cd_info.ts";
 import { CdInfoList } from "@/model/cd_info_list.ts";
@@ -9,19 +9,18 @@ import {
   assertLess,
 } from "@std/assert";
 
-const cdInfoList: CdInfoList = dataJsonConvertor();
-const cdInfo: CdInfo = cdInfoList.getList()[0];
-const maxDownloadSiteCount: number = cdInfo.downloadSiteList.length;
+Deno.test("ハイレゾ対応ストア検索テスト：ハイレゾ対応のみ", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+  const cdInfoAtFirst: CdInfo = source.getList()[0];
+  const maxDownloadSiteCount: number = cdInfoAtFirst.downloadSiteList.length;
 
-Deno.test("ハイレゾ対応ストア検索テスト：ハイレゾ対応のみ", () => {
   const isHiRes = "true";
   const exceptedMin = 0;
   const exceptedMax = maxDownloadSiteCount;
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo = cdInfoList.filterByHiResStore(isHiRes).getList()[0];
-
-  const actual = result.downloadSiteList.length;
+  const filteringResult: CdInfo =
+    source.filterByHiResStore(isHiRes).getList()[0];
+  const actual = filteringResult.downloadSiteList.length;
 
   Logger.info(`件数：${actual} / 期待値：${exceptedMin} < X < ${exceptedMax}`);
 
@@ -29,7 +28,7 @@ Deno.test("ハイレゾ対応ストア検索テスト：ハイレゾ対応のみ
   assertLess(actual, exceptedMax);
 
   let isContainNotHiRes = false;
-  result.downloadSiteList.forEach((downloadSite) => {
+  filteringResult.downloadSiteList.forEach((downloadSite) => {
     Logger.info(
       `サイト名：${downloadSite.name} / ハイレゾ対応：${downloadSite.isHiRes}`,
     );
@@ -41,14 +40,17 @@ Deno.test("ハイレゾ対応ストア検索テスト：ハイレゾ対応のみ
   assertFalse(isContainNotHiRes);
 });
 
-Deno.test("ハイレゾ対応ストア検索テスト：すべて", () => {
+Deno.test("ハイレゾ対応ストア検索テスト：すべて", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+  const cdInfoAtFirst: CdInfo = source.getList()[0];
+  const maxDownloadSiteCount: number = cdInfoAtFirst.downloadSiteList.length;
+
   const isHiRes = "false";
   const excepted = maxDownloadSiteCount;
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo = cdInfoList.filterByHiResStore(isHiRes).getList()[0];
-
-  const actual = result.downloadSiteList.length;
+  const filteringResult: CdInfo =
+    source.filterByHiResStore(isHiRes).getList()[0];
+  const actual = filteringResult.downloadSiteList.length;
 
   Logger.info(`件数：${actual} / 期待値：${excepted}`);
 
