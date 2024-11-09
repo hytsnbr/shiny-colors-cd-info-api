@@ -38,7 +38,7 @@ jobs:
         run: deno task cached
 
       - name: Run test
-        run: deno test
+        run: deno run test
 
       - name: Diff
         id: diff
