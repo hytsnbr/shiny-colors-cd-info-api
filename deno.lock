@@ -106,9 +106,6 @@
       "integrity": "sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw=="
     }
   },
-  "remote": {
-    "https://raw.githubusercontent.com/hytsnbr/shiny-colors-cd-info-collector/main/result/data.json": "368b8e223923c9f971dd6749a7bc15383bef8f2585c1747f1df4216ca9dcf10a"
-  },
   "workspace": {
     "dependencies": [
       "jsr:@oak/oak@17.1.3",

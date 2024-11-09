@@ -1,4 +1,4 @@
-import dataJsonConvertor from "@/functions/data_json_convertor.ts";
+import { getCdInfoListFromGithub } from "@/functions/data_json_convertor.ts";
 import { Logger } from "@/logger.ts";
 import { CdInfo } from "@/model/cd_info.ts";
 import { CdInfoList } from "@/model/cd_info_list.ts";
@@ -8,17 +8,17 @@ import {
   assertLessOrEqual,
 } from "@std/assert";
 
-const cdInfos: CdInfo[] = dataJsonConvertor().getList();
-const maxCdCount: number = cdInfos.length;
+Deno.test("ストア名検索テスト：ヒットあり（パッケージ版）", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+  const cdInfoAll: CdInfo[] = source.getList();
+  const maxCdCount: number = cdInfoAll.length;
 
-Deno.test("ストア名検索テスト：ヒットあり（パッケージ版）", () => {
   const storeName = "TOWER RECORDS ONLINE";
   const exceptedMin = 1;
   const exceptedMax = maxCdCount;
   const regexpStoreName = RegExp(`.*${storeName}.*`);
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByStoreName(storeName).getList();
+  const result: CdInfo[] = source.filterByStoreName(storeName).getList();
   const actual = result.length;
 
   Logger.info(`検索ストア名：${storeName}`);
@@ -46,14 +46,17 @@ Deno.test("ストア名検索テスト：ヒットあり（パッケージ版）
   assertEquals(notContainTargetStoreCount, 0);
 });
 
-Deno.test("ストア名検索テスト：ヒットあり（ダウンロード版）", () => {
+Deno.test("ストア名検索テスト：ヒットあり（ダウンロード版）", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+  const cdInfoAll: CdInfo[] = source.getList();
+  const maxCdCount: number = cdInfoAll.length;
+
   const storeName = "Spotify";
   const exceptedMin = 1;
   const exceptedMax = maxCdCount;
   const regexpStoreName = RegExp(`.*${storeName}.*`);
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByStoreName(storeName).getList();
+  const result: CdInfo[] = source.filterByStoreName(storeName).getList();
   const actual = result.length;
 
   Logger.info(`検索ストア名：${storeName}`);
@@ -81,12 +84,13 @@ Deno.test("ストア名検索テスト：ヒットあり（ダウンロード版
   assertEquals(notContainTargetStoreCount, 0);
 });
 
-Deno.test("ストア名検索テスト：ヒットなし（パッケージ版）", () => {
+Deno.test("ストア名検索テスト：ヒットなし（パッケージ版）", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const storeName = "ABCDEFG";
   const expectedCount = 0;
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByStoreName(storeName).getList();
+  const result: CdInfo[] = source.filterByStoreName(storeName).getList();
 
   const actualCount = result.length;
 
@@ -96,12 +100,13 @@ Deno.test("ストア名検索テスト：ヒットなし（パッケージ版）
   assertEquals(actualCount, expectedCount);
 });
 
-Deno.test("ストア名検索テスト：ヒットなし（ダウンロード版）", () => {
+Deno.test("ストア名検索テスト：ヒットなし（ダウンロード版）", async () => {
+  const source: CdInfoList = await getCdInfoListFromGithub();
+
   const storeName = "ABCDEFG";
   const expectedCount = 0;
 
-  const cdInfoList: CdInfoList = dataJsonConvertor();
-  const result: CdInfo[] = cdInfoList.filterByStoreName(storeName).getList();
+  const result: CdInfo[] = source.filterByStoreName(storeName).getList();
 
   const actualCount = result.length;
 
