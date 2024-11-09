@@ -2,6 +2,7 @@ import { hasDuplicateValue } from "@/functions/array_util.ts";
 import { isValidDate } from "@/functions/date_util.ts";
 import { CdInfo } from "@/model/cd_info.ts";
 import { Store } from "@/model/store.ts";
+import { Logger } from "@/logger.ts";
 
 export class CdInfoList {
   private list: CdInfo[];
@@ -192,6 +193,121 @@ export class CdInfoList {
 
       return cdInfo;
     });
+
+    return this;
+  }
+
+  sort(sort: string): CdInfoList {
+    if (sort === "") {
+      return this;
+    }
+
+    const sortRegex = "(.+):(asc|desc)";
+    const sortOrders = sort.replaceAll(" ", "").split(",");
+
+    for (const sortOrder of sortOrders) {
+      const keyName = sortOrder.match(sortRegex)?.at(1) || "";
+      const orderby = sortOrder.match(sortRegex)?.at(2) || "";
+
+      switch (orderby) {
+        case "asc":
+          this.sortAsc(keyName);
+          break;
+        case "desc":
+          this.sortDesc(keyName);
+          break;
+        default:
+          Logger.error(`Invalid sort order: ${sortOrder}`);
+
+          throw new Error(`Invalid sort order: ${sortOrder}`);
+      }
+    }
+
+    return this;
+  }
+
+  private sortAsc(sortKeyName: string): CdInfoList {
+    if (sortKeyName === "") {
+      return this;
+    }
+
+    switch (sortKeyName) {
+      case "title":
+        this.list.sort((x, y) => {
+          const xTitle = x.title.replaceAll(/[“”]/g, "");
+          const yTitle = y.title.replaceAll(/[“”]/g, "");
+
+          return xTitle.localeCompare(yTitle);
+        });
+        break;
+      case "recordNumbers":
+        this.list.sort((x, y) =>
+          x.recordNumbers[0] > y.recordNumbers[0] ? 1 : -1
+        );
+        break;
+      case "releaseDate":
+        this.list.sort((x, y) => {
+          if (x.releaseDate === null) {
+            return -1;
+          }
+          if (y.releaseDate === null) {
+            return 1;
+          }
+          return x.releaseDate > y.releaseDate ? 1 : -1;
+        });
+        break;
+      case "artist":
+        this.list.sort((x, y) => {
+          const xArtist = x.artist;
+          const yArtist = y.artist;
+
+          return xArtist.localeCompare(yArtist);
+        });
+        break;
+    }
+
+    return this;
+  }
+
+  private sortDesc(sortKeyName: string): CdInfoList {
+    if (sortKeyName === "") {
+      return this;
+    }
+
+    switch (sortKeyName) {
+      case "title":
+        this.list.sort((x, y) => {
+          const xTitle = x.title.replaceAll(/[“”]/g, "");
+          const yTitle = y.title.replaceAll(/[“”]/g, "");
+
+          return xTitle.localeCompare(yTitle) * -1; // 降順なので正負を反転させる
+        });
+        break;
+      case "recordNumbers":
+        this.list.sort((x, y) =>
+          x.recordNumbers[0] < y.recordNumbers[0] ? 1 : -1
+        );
+        break;
+      case "releaseDate":
+        this.list.sort((x, y) => {
+          if (x.releaseDate === null) {
+            return 1;
+          }
+          if (y.releaseDate === null) {
+            return -1;
+          }
+          return x.releaseDate < y.releaseDate ? 1 : -1;
+        });
+        break;
+      case "artist":
+        this.list.sort((x, y) => {
+          const xArtist = x.artist;
+          const yArtist = y.artist;
+
+          return xArtist.localeCompare(yArtist) * -1; // 降順なので正負を反転させる
+        });
+        break;
+    }
 
     return this;
   }
