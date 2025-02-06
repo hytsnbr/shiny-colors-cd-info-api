@@ -9,12 +9,12 @@
     "jsr:@std/crypto@1": "1.0.4",
     "jsr:@std/encoding@1": "1.0.7",
     "jsr:@std/encoding@^1.0.7": "1.0.7",
-    "jsr:@std/fmt@^1.0.4": "1.0.5",
-    "jsr:@std/fs@^1.0.9": "1.0.11",
+    "jsr:@std/fmt@^1.0.5": "1.0.5",
+    "jsr:@std/fs@^1.0.11": "1.0.11",
     "jsr:@std/http@1": "1.0.13",
     "jsr:@std/internal@^1.0.5": "1.0.5",
-    "jsr:@std/io@0.225": "0.225.2",
-    "jsr:@std/log@0.224.13": "0.224.13",
+    "jsr:@std/io@~0.225.2": "0.225.2",
+    "jsr:@std/log@0.224.14": "0.224.14",
     "jsr:@std/media-types@1": "1.1.0",
     "jsr:@std/path@1": "1.0.8",
     "npm:path-to-regexp@^6.3.0": "6.3.0"
@@ -76,8 +76,8 @@
     "@std/io@0.225.2": {
       "integrity": "3c740cd4ee4c082e6cfc86458f47e2ab7cb353dc6234d5e9b1f91a2de5f4d6c7"
     },
-    "@std/log@0.224.13": {
-      "integrity": "f04d82f676c9eb4306194ca166d296d9f1456fe4b7edf2a404a0d55c94d31df7",
+    "@std/log@0.224.14": {
+      "integrity": "257f7adceee3b53bb2bc86c7242e7d1bc59729e57d4981c4a7e5b876c808f05e",
       "dependencies": [
         "jsr:@std/fmt",
         "jsr:@std/fs",
@@ -101,7 +101,7 @@
       "jsr:@oak/oak@17.1.4",
       "jsr:@std/assert@1.0.11",
       "jsr:@std/dotenv@0.225.3",
-      "jsr:@std/log@0.224.13"
+      "jsr:@std/log@0.224.14"
     ]
   }
 }
