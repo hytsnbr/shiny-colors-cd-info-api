@@ -1,7 +1,7 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@oak/commons@1": "1.0.0",
+    "jsr:@oak/commons@1": "1.0.1",
     "jsr:@oak/oak@17.1.4": "17.1.4",
     "jsr:@std/assert@1": "1.0.13",
     "jsr:@std/assert@1.0.12": "1.0.12",
@@ -20,8 +20,8 @@
     "npm:path-to-regexp@^6.3.0": "6.3.0"
   },
   "jsr": {
-    "@oak/commons@1.0.0": {
-      "integrity": "49805b55603c3627a9d6235c0655aa2b6222d3036b3a13ff0380c16368f607ac",
+    "@oak/commons@1.0.1": {
+      "integrity": "889ff210f0b4292591721be07244ecb1b5c118742f5273c70cf30d7cd4184d0c",
       "dependencies": [
         "jsr:@std/assert@1",
         "jsr:@std/bytes",
