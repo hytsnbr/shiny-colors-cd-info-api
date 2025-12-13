@@ -2,7 +2,7 @@
   "version": "5",
   "specifiers": {
     "jsr:@oak/commons@1": "1.0.1",
-    "jsr:@oak/oak@17.1.6": "17.1.6",
+    "jsr:@oak/oak@17.2.0": "17.2.0",
     "jsr:@std/assert@1": "1.0.16",
     "jsr:@std/assert@1.0.15": "1.0.15",
     "jsr:@std/bytes@1": "1.0.6",
@@ -17,7 +17,6 @@
     "jsr:@std/log@0.224.14": "0.224.14",
     "jsr:@std/media-types@1": "1.1.0",
     "jsr:@std/path@1": "1.1.3",
-    "npm:@types/node@*": "24.2.0",
     "npm:path-to-regexp@^6.3.0": "6.3.0"
   },
   "jsr": {
@@ -32,8 +31,8 @@
         "jsr:@std/media-types"
       ]
     },
-    "@oak/oak@17.1.6": {
-      "integrity": "c7eef2eec733fba8e72b679bba3b8cf2fceccf5ef489a8b8fb43571908c0335d",
+    "@oak/oak@17.2.0": {
+      "integrity": "938537a92fc7922a46a9984696c65fb189c9baad164416ac3e336768a9ff0cd1",
       "dependencies": [
         "jsr:@oak/commons",
         "jsr:@std/assert@1",
@@ -99,22 +98,13 @@
     }
   },
   "npm": {
-    "@types/node@24.2.0": {
-      "integrity": "sha512-3xyG3pMCq3oYCNg7/ZP+E1ooTaGB4cG8JWRsqqOYQdbWNY4zbaV0Ennrd7stjiJEFZCaybcIgpTjJWHRfBSIDw==",
-      "dependencies": [
-        "undici-types"
-      ]
-    },
     "path-to-regexp@6.3.0": {
       "integrity": "sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ=="
-    },
-    "undici-types@7.10.0": {
-      "integrity": "sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag=="
     }
   },
   "workspace": {
     "dependencies": [
-      "jsr:@oak/oak@17.1.6",
+      "jsr:@oak/oak@17.2.0",
       "jsr:@std/assert@1.0.15",
       "jsr:@std/dotenv@0.225.5",
       "jsr:@std/log@0.224.14"
