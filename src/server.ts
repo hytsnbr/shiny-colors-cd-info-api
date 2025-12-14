@@ -13,7 +13,7 @@ app.addEventListener("listen", ({ hostname, port, secure }) => {
 });
 
 app.addEventListener("error", (event) => {
-  console.error(event.error);
+  Logger.error(event.error);
 });
 
 app.use(router.routes());
