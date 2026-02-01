@@ -27,7 +27,7 @@
 | storeName          | string   | Spotify              | 販売ストア名（ダウンロード、店頭販売） |
 | isHiRes            | boolean  | true                 | ハイレゾ対応のストアか                 |
 
-## レスポンス
+## レスポンス（例）
 
 <details>
 <summary>長いので格納</summary>
@@ -163,8 +163,7 @@
         "isHiRes": false
       }
     ]
-  },
-  ...
+  }
 ]
 ```
 
