@@ -24,3 +24,6 @@ jobs:
 
       - name: Run CI
         run: deno task ci
+
+      - name: Collect Coverage
+        run: deno task coverage

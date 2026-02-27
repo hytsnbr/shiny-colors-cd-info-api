@@ -1,0 +1,40 @@
+name: SonarQube Analysis
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+      
+      - name: Deno Setup
+        uses: denoland/setup-deno@e95548e56dfa95d4e1a28d6f422fafe75c4c26fb # v2.0.
+
+      - name: Collect Coverage
+        run: |
+          # 1. テスト実行
+          deno task coverage
+          
+          # 2. 絶対パスを相対パスに置換
+          deno coverage coverage_result --lcov | sed "s|SF:$GITHUB_WORKSPACE/|SF:|g" > lcov.info
+
+          # 3. lcov.infoの内容を表示（デバッグ用）
+          head -n 5 lcov.info
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@a31c9398be7ace6bbfaf30c0bd5d415f843d45e9 # v7.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
