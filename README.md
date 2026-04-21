@@ -1,7 +1,5 @@
 # shiny-colors-cd-info-api
 
-![deno deploy](https://img.shields.io/badge/deno-deploy-green?logo|deno)
-
 ## 概要
 
 アイドルマスターシャイニーカラーズのCD情報をまとめたAPI\
@@ -9,7 +7,7 @@
 
 ## エンドポイント
 
-[`https://shiny-colors-cd-info-api.deno.dev/list`](https://shiny-colors-cd-info-api.deno.dev/list)
+[`https://shiny-colors-cd-info.hytsnbr.deno.net/list`](https://shiny-colors-cd-info.hytsnbr.deno.net/list)
 
 ## クエリパラメータ
 
