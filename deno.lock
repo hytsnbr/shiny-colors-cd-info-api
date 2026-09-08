@@ -3,6 +3,7 @@
   "specifiers": {
     "jsr:@hono/hono@4.13.7": "4.13.7",
     "jsr:@std/assert@1.0.19": "1.0.19",
+    "jsr:@std/dotenv@0.225.8": "0.225.8",
     "jsr:@std/fmt@^1.0.5": "1.0.10",
     "jsr:@std/fs@^1.0.11": "1.0.24",
     "jsr:@std/internal@^1.0.12": "1.0.14",
@@ -18,6 +19,9 @@
       "dependencies": [
         "jsr:@std/internal"
       ]
+    },
+    "@std/dotenv@0.225.8": {
+      "integrity": "27b8c1a9d00cbf938345a5924487c04d9b27bdd7e7bd1983f54bcf76d0a0174a"
     },
     "@std/fmt@1.0.10": {
       "integrity": "90dfba288802ac6de82fb31d0917eb9e4450b9925b954d5e51fc29ac07419db5"
@@ -44,7 +48,7 @@
     "dependencies": [
       "jsr:@hono/hono@4.13.7",
       "jsr:@std/assert@1.0.19",
-      "jsr:@std/dotenv@0.225.6",
+      "jsr:@std/dotenv@0.225.8",
       "jsr:@std/log@0.224.14"
     ]
   }
