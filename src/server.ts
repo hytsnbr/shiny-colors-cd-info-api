@@ -1,24 +1,17 @@
 import { Logger } from "@/logger.ts";
 import { router } from "@/router/router.ts";
-import { Application } from "@oak/oak";
 
-const app = new Application();
+router.onError((error, ctx) => {
+  Logger.error(error);
 
-app.addEventListener("listen", ({ hostname, port, secure }) => {
-  Logger.info(
-    `Listening on: ${secure ? "https://" : "http://"}${
-      hostname ?? "localhost"
-    }:${port}`,
-  );
+  return ctx.json({
+    error: "Internal Server Error",
+  }, 500);
 });
 
-app.addEventListener("error", (event) => {
-  Logger.error(event.error);
-});
-
-app.use(router.routes());
-app.use(router.allowedMethods());
-
-await app.listen({
+Deno.serve({
   port: 8080,
-});
+  onListen({ hostname, port }: Deno.NetAddr): void {
+    Logger.info(`Listening on: ${hostname || "localhost"}:${port}`);
+  },
+}, router.fetch);

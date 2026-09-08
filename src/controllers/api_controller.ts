@@ -1,24 +1,23 @@
+import { getCdInfoListFromGithub } from "@/functions/data_json_convertor.ts";
+import { Logger } from "@/logger.ts";
 import { CdInfo } from "@/model/cd_info.ts";
 import { CdInfoList } from "@/model/cd_info_list.ts";
-import { Response } from "@/model/response.ts";
-import { RouterContext } from "@oak/oak";
-import { Logger } from "@/logger.ts";
-import { getCdInfoListFromGithub } from "@/functions/data_json_convertor.ts";
+import { Response as ApiResponse } from "@/model/response.ts";
+import { Context } from "@hono/hono";
 
 export const apiController = {
-  async getList(ctx: RouterContext<string>): Promise<void> {
-    const searchParams = ctx.request.url.searchParams;
-    const releaseDateStart = searchParams.get("releaseDateStart") || "";
-    const releaseDateEnd = searchParams.get("releaseDateEnd") || "";
-    const recordNumber = searchParams.get("recordNumber") || "";
-    const recordNumbers = searchParams.get("recordNumbers") || "";
-    const limited = searchParams.get("limited") || "";
-    const title = searchParams.get("title") || "";
-    const artist = searchParams.get("artist") || "";
-    const series = searchParams.get("series") || "";
-    const storeName = searchParams.get("storeName") || "";
-    const isHiRes = searchParams.get("isHiRes") || "";
-    const sort = searchParams.get("sort") || "";
+  async getList(ctx: Context): Promise<Response> {
+    const releaseDateStart = ctx.req.query("releaseDateStart") || "";
+    const releaseDateEnd = ctx.req.query("releaseDateEnd") || "";
+    const recordNumber = ctx.req.query("recordNumber") || "";
+    const recordNumbers = ctx.req.query("recordNumbers") || "";
+    const limited = ctx.req.query("limited") || "";
+    const title = ctx.req.query("title") || "";
+    const artist = ctx.req.query("artist") || "";
+    const series = ctx.req.query("series") || "";
+    const storeName = ctx.req.query("storeName") || "";
+    const isHiRes = ctx.req.query("isHiRes") || "";
+    const sort = ctx.req.query("sort") || "";
 
     Logger.debug(`Debug Query Parameters:`);
     Logger.debug(` releaseDateStart: ${releaseDateStart}`);
@@ -47,6 +46,6 @@ export const apiController = {
       .sort(sort)
       .getList();
 
-    ctx.response.body = new Response(result).list;
+    return ctx.json(new ApiResponse(result).list);
   },
 };

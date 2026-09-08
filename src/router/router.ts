@@ -1,7 +1,7 @@
 import { apiController } from "@/controllers/api_controller.ts";
-import { Router } from "@oak/oak";
+import { Hono } from "@hono/hono";
 
-const router = new Router();
+const router = new Hono();
 
 router.get("/list", apiController.getList);
 
