@@ -1,24 +1,22 @@
-# [Choice] Debian OS version: bullseye, buster
-ARG VARIANT=bullseye
-FROM --platform=linux/amd64 mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
+# Denoのバージョンを明示的に固定
+ARG DENO_VERSION=2.9.6
+FROM denoland/deno:${DENO_VERSION}
 
-ENV DENO_INSTALL=/deno
-RUN mkdir -p /deno
-RUN curl -fsSL https://deno.land/x/install/install.sh | sh
-RUN chown -R vscode /deno
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=${USER_UID}
 
-ENV PATH=${DENO_INSTALL}/bin:${PATH}
-ENV DENO_DIR=${DENO_INSTALL}/.cache/deno
+# devcontainer.json の remoteUser("vscode")を作成
+# ※ 公式 denoland/deno イメージには vscode ユーザーが存在しないため必須
+RUN groupadd --gid ${USER_GID} ${USERNAME} \
+    && useradd --uid ${USER_UID} --gid ${USER_GID} -m -s /bin/bash ${USERNAME}
 
-RUN deno upgrade
+# Denoの依存キャッシュ置き場のみ vscode ユーザーの書き込み可能な場所に用意する
+# （バイナリ自体は /usr/local/bin/deno のまま。devcontainer.json の "deno.cache": "$HOME/.cache/deno" と一致させる）
+ENV DENO_DIR=/home/${USERNAME}/.cache/deno
 
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#    && apt-get -y install --no-install-recommends <your-package-list-here>
+RUN mkdir -p ${DENO_DIR} \
+    && chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}
 
-RUN type -p curl >/dev/null || (apt update && apt install curl -y)
-RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-RUN chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
-RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-RUN apt update
-RUN apt install gh -y
+# 以降は作成したユーザー vscode で実行
+USER ${USERNAME}

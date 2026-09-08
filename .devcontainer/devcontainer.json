@@ -7,6 +7,10 @@
     "--name",
     "shiny-colors-cd-info-api"
   ],
+  // GitHub CLI は Dockerfile に手書きせず、公式Featureで導入
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1.1.2": {}
+  },
   "postAttachCommand": "deno task init",
   // Configure tool-specific properties.
   "customizations": {
@@ -19,7 +23,10 @@
         // Enables Deno linting for the project
         "deno.lint": true,
         // Sets Deno as the default formatter for the project
-        "editor.defaultFormatter": "denoland.vscode-deno"
+        "editor.defaultFormatter": "denoland.vscode-deno",
+        // Sets the path to the Deno binary in the container
+        "deno.path": "/usr/bin/deno",
+        "deno.cache": "/home/vscode/.cache/deno"
       },
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
@@ -31,20 +38,18 @@
         "mhutchie.git-graph",
         "donjayamanne.githistory",
         "eamodio.gitlens",
-        "VisualStudioExptTeam.vscodeintellicode",
-        "VisualStudioExptTeam.intellicode-api-usage-examples",
-        "VisualStudioExptTeam.vscodeintellicode-completions",
         "ryu1kn.partial-diff",
         "hbenl.vscode-test-explorer",
         "wayou.vscode-todo-highlight",
-        "Gruntfuggly.todo-tree",
         "redhat.vscode-yaml",
         "justjavac.vscode-deno-extensionpack",
         "tamasfe.even-better-toml",
         "RapidAPI.vscode-rapidapi-client",
         "github.vscode-github-actions",
         "rangav.vscode-thunder-client",
-        "jbockle.jbockle-format-files"
+        "jbockle.jbockle-format-files",
+        "FanaticPythoner.better-todo-tree",
+        "AndrewButson.vscode-openapi-viewer"
       ]
     }
   },
