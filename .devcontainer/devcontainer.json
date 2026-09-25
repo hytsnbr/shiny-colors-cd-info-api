@@ -9,7 +9,7 @@
   ],
   // GitHub CLI は Dockerfile に手書きせず、公式Featureで導入
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1.1.2": {}
+    "ghcr.io/devcontainers/features/github-cli:1.1.3": {}
   },
   "postAttachCommand": "deno task init",
   // Configure tool-specific properties.
