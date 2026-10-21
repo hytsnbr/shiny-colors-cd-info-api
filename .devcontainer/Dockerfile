@@ -1,5 +1,5 @@
 # Denoのバージョンを明示的に固定
-ARG DENO_VERSION=2.9.7
+ARG DENO_VERSION=2.9.8
 FROM denoland/deno:${DENO_VERSION}
 
 ARG USERNAME=vscode
